@@ -57,7 +57,7 @@ public class ClientView {
         String telephone = scanner.nextLine();
 
         Client client = clientService.ajouterClient(nom, prenom, telephone);
-        System.out.println("Client ajouté : " + client);
+        System.out.println("Client ajouté : " + client.toChaine());
     }
 
     private void afficherClients() {
@@ -67,7 +67,7 @@ public class ClientView {
             return;
         }
         for (Client client : clients) {
-            System.out.println(client);
+            System.out.println(client.toChaine());
         }
     }
 
@@ -80,7 +80,7 @@ public class ClientView {
             return;
         }
         for (Client client : resultats) {
-            System.out.println(client);
+            System.out.println(client.toChaine());
         }
     }
 }
