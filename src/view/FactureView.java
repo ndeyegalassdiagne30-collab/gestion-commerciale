@@ -53,8 +53,7 @@ public class FactureView {
     }
 
     private void genererFacture() {
-        System.out.print("Id de la commande : ");
-        int id = Integer.parseInt(scanner.nextLine());
+        int id = Saisie.lireEntier(scanner, "Id de la commande : ");
         Commande commande = commandeService.trouverParId(id);
         if (commande == null) {
             System.out.println("Commande introuvable.");
@@ -72,8 +71,7 @@ public class FactureView {
     }
 
     private void afficherFactureDeCommande() {
-        System.out.print("Id de la commande : ");
-        int id = Integer.parseInt(scanner.nextLine());
+        int id = Saisie.lireEntier(scanner, "Id de la commande : ");
         Commande commande = commandeService.trouverParId(id);
         if (commande == null) {
             System.out.println("Commande introuvable.");

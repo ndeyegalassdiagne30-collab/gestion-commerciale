@@ -58,8 +58,7 @@ public class CommandeView {
     }
 
     private void creerCommande() {
-        System.out.print("Id du client : ");
-        int idClient = Integer.parseInt(scanner.nextLine());
+        int idClient = Saisie.lireEntier(scanner, "Id du client : ");
         Client client = clientService.trouverParId(idClient);
         if (client == null) {
             System.out.println("Client introuvable.");
@@ -73,15 +72,13 @@ public class CommandeView {
         // Une commande doit contenir au moins un produit
         boolean ajouterUnAutre = true;
         while (ajouterUnAutre) {
-            System.out.print("Id du produit à ajouter : ");
-            int idProduit = Integer.parseInt(scanner.nextLine());
+            int idProduit = Saisie.lireEntier(scanner, "Id du produit à ajouter : ");
             Produit produit = produitService.trouverParId(idProduit);
             if (produit == null) {
                 System.out.println("Produit introuvable.");
                 continue;
             }
-            System.out.print("Quantité : ");
-            int quantite = Integer.parseInt(scanner.nextLine());
+            int quantite = Saisie.lireEntier(scanner, "Quantité : ");
 
             boolean ok = commandeService.ajouterProduitACommande(commande, produit, quantite);
             if (!ok) {
@@ -103,8 +100,7 @@ public class CommandeView {
     }
 
     private void afficherProduitsDeCommande() {
-        System.out.print("Id de la commande : ");
-        int id = Integer.parseInt(scanner.nextLine());
+        int id = Saisie.lireEntier(scanner, "Id de la commande : ");
         Commande commande = commandeService.trouverParId(id);
         if (commande == null) {
             System.out.println("Commande introuvable.");
