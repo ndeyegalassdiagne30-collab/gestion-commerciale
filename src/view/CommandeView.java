@@ -78,7 +78,7 @@ public class CommandeView {
                 System.out.println("Produit introuvable.");
                 continue;
             }
-            int quantite = Saisie.lireEntier(scanner, "Quantité : ");
+            int quantite = Saisie.lireEntierStrictementPositif(scanner, "Quantité : ");
 
             boolean ok = commandeService.ajouterProduitACommande(commande, produit, quantite);
             if (!ok) {

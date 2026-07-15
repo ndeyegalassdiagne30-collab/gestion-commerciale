@@ -51,8 +51,8 @@ public class ProduitView {
     private void ajouterProduit() {
         System.out.print("Libellé : ");
         String libelle = scanner.nextLine();
-        int quantite = Saisie.lireEntier(scanner, "Quantité en stock : ");
-        double prix = Saisie.lireDouble(scanner, "Prix unitaire : ");
+        int quantite = Saisie.lireEntierPositifOuNul(scanner, "Quantité en stock : ");
+        double prix = Saisie.lireDoublePositifOuNul(scanner, "Prix unitaire : ");
 
         Produit produit = produitService.ajouterProduit(libelle, quantite, prix);
         System.out.println("Produit ajouté : " + produit.toChaine());
