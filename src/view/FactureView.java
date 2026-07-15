@@ -67,7 +67,7 @@ public class FactureView {
         if (facture == null) {
             System.out.println("Impossible de générer la facture : la commande n'est pas validée.");
         } else {
-            System.out.println("Facture générée : " + facture);
+            System.out.println("Facture générée : " + facture.toChaine());
         }
     }
 
@@ -84,7 +84,7 @@ public class FactureView {
             System.out.println("Aucune facture pour cette commande.");
             return;
         }
-        System.out.println(facture);
+        System.out.println(facture.toChaine());
     }
 
     private void afficherFacturesImpayees() {
@@ -94,7 +94,7 @@ public class FactureView {
             return;
         }
         for (Facture facture : factures) {
-            System.out.println(facture);
+            System.out.println(facture.toChaine());
         }
     }
 }
