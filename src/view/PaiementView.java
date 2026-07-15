@@ -49,8 +49,7 @@ public class PaiementView {
     }
 
     private void enregistrerPaiement() {
-        System.out.print("Id de la facture : ");
-        int id = Integer.parseInt(scanner.nextLine());
+        int id = Saisie.lireEntier(scanner, "Id de la facture : ");
         Facture facture = factureService.trouverParId(id);
         if (facture == null) {
             System.out.println("Facture introuvable.");
@@ -60,8 +59,7 @@ public class PaiementView {
         System.out.println("Montant restant à payer : " + facture.getMontantRestant() + " FCFA");
         System.out.print("Numéro du paiement : ");
         String numero = scanner.nextLine();
-        System.out.print("Montant versé : ");
-        double montant = Double.parseDouble(scanner.nextLine());
+        double montant = Saisie.lireDouble(scanner, "Montant versé : ");
 
         Paiement paiement = paiementService.enregistrerPaiement(facture, numero, montant);
         if (paiement == null) {
@@ -75,8 +73,7 @@ public class PaiementView {
     }
 
     private void afficherPaiementsDeFacture() {
-        System.out.print("Id de la facture : ");
-        int id = Integer.parseInt(scanner.nextLine());
+        int id = Saisie.lireEntier(scanner, "Id de la facture : ");
         Facture facture = factureService.trouverParId(id);
         if (facture == null) {
             System.out.println("Facture introuvable.");
