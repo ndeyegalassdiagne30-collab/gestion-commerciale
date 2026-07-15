@@ -76,15 +76,14 @@ public class CommandeView {
             Produit produit = produitService.trouverParId(idProduit);
             if (produit == null) {
                 System.out.println("Produit introuvable.");
-                continue;
-            }
-            int quantite = Saisie.lireEntierStrictementPositif(scanner, "Quantité : ");
-
-            boolean ok = commandeService.ajouterProduitACommande(commande, produit, quantite);
-            if (!ok) {
-                System.out.println("Stock insuffisant pour ce produit.");
             } else {
-                System.out.println("Produit ajouté à la commande.");
+                int quantite = Saisie.lireEntierStrictementPositif(scanner, "Quantité : ");
+                boolean ok = commandeService.ajouterProduitACommande(commande, produit, quantite);
+                if (!ok) {
+                    System.out.println("Stock insuffisant pour ce produit.");
+                } else {
+                    System.out.println("Produit ajouté à la commande.");
+                }
             }
 
             System.out.print("Ajouter un autre produit ? (o/n) : ");
