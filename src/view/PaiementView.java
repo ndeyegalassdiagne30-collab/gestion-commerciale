@@ -67,7 +67,7 @@ public class PaiementView {
         if (paiement == null) {
             System.out.println("Paiement refusé : le montant dépasse le solde restant.");
         } else {
-            System.out.println("Paiement enregistré : " + paiement);
+            System.out.println("Paiement enregistré : " + paiement.toChaine());
             if (facture.estSoldee()) {
                 System.out.println("La facture est maintenant soldée. La commande est payée.");
             }
@@ -88,7 +88,7 @@ public class PaiementView {
             return;
         }
         for (Paiement paiement : paiements) {
-            System.out.println(paiement);
+            System.out.println(paiement.toChaine());
         }
     }
 }
