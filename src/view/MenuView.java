@@ -16,7 +16,7 @@ public class MenuView {
     private Scanner scanner;
 
     public MenuView(ClientView clientView, ProduitView produitView, CommandeView commandeView,
-                     FactureView factureView, PaiementView paiementView, Scanner scanner) {
+            FactureView factureView, PaiementView paiementView, Scanner scanner) {
         this.clientView = clientView;
         this.produitView = produitView;
         this.commandeView = commandeView;
