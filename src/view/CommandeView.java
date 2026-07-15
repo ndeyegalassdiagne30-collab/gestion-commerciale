@@ -20,7 +20,7 @@ public class CommandeView {
     private Scanner scanner;
 
     public CommandeView(CommandeService commandeService, ClientService clientService,
-                         ProduitService produitService, Scanner scanner) {
+            ProduitService produitService, Scanner scanner) {
         this.commandeService = commandeService;
         this.clientService = clientService;
         this.produitService = produitService;
@@ -96,7 +96,7 @@ public class CommandeView {
 
         boolean validee = commandeService.validerCommande(commande);
         if (validee) {
-            System.out.println("Commande validée : " + commande);
+            System.out.println("Commande validée : " + commande.toChaine());
         } else {
             System.out.println("La commande n'a pas pu être validée (aucun produit).");
         }
@@ -110,7 +110,7 @@ public class CommandeView {
             System.out.println("Commande introuvable.");
             return;
         }
-        commande.getLignes().forEach(System.out::println);
+        commande.getLignes().forEach(ligne -> System.out.println(ligne.toChaine()));
     }
 
     private void afficherCommandes() {
@@ -120,7 +120,7 @@ public class CommandeView {
             return;
         }
         for (Commande commande : commandes) {
-            System.out.println(commande);
+            System.out.println(commande.toChaine());
         }
     }
 }
