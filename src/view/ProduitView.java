@@ -57,7 +57,7 @@ public class ProduitView {
         double prix = Double.parseDouble(scanner.nextLine());
 
         Produit produit = produitService.ajouterProduit(libelle, quantite, prix);
-        System.out.println("Produit ajouté : " + produit);
+        System.out.println("Produit ajouté : " + produit.toChaine());
     }
 
     private void afficherProduits() {
@@ -67,7 +67,7 @@ public class ProduitView {
             return;
         }
         for (Produit produit : produits) {
-            System.out.println(produit);
+            System.out.println(produit.toChaine());
         }
     }
 
@@ -80,7 +80,7 @@ public class ProduitView {
             return;
         }
         for (Produit produit : resultats) {
-            System.out.println(produit);
+            System.out.println(produit.toChaine());
         }
     }
 }
