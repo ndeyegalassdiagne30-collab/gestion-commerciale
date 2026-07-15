@@ -47,8 +47,7 @@ public class Client {
         this.telephone = telephone;
     }
 
-    @Override
-    public String toString() {
+    public String toChaine() {
         return "Client #" + id + " - " + prenom + " " + nom + " (tel: " + telephone + ")";
     }
 }
