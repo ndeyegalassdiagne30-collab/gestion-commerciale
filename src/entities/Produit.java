@@ -52,7 +52,7 @@ public class Produit {
      * Retourne false si le stock est insuffisant.
      */
     public boolean retirerDuStock(int quantite) {
-        if (quantite > this.quantiteEnStock) {
+        if (quantite <= 0 || quantite > this.quantiteEnStock) {
             return false;
         }
         this.quantiteEnStock -= quantite;
