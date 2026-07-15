@@ -48,7 +48,7 @@ public class Client {
     }
 
     public String toChaine() {
-        return "---------------Client :" +"----------------"+ "\n"
+        return "-------------------Client------------------"+ "\n"
                 + "  Id       : " + id + "\n"
                 + "  Nom      : " + nom + "\n"
                 + "  Prénom   : " + prenom + "\n"

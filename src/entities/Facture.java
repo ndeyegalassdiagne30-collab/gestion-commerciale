@@ -88,8 +88,12 @@ public class Facture {
     }
 
     public String toChaine() {
-        return "Facture #" + numero + " du " + date + " - Montant: " + montant
-                + " FCFA - Restant: " + getMontantRestant() + " FCFA"
-                + (estSoldee() ? " [SOLDEE]" : " [NON SOLDEE]");
-    }
+    return "----------------Facture-----------------" + "\n"
+        + "Numéro :" + numero + "\n"
+        + "Date : " + date + "\n"
+        + "Montant : " + montant + " FCFA" + "\n"
+        + "Restant : " + getMontantRestant() + " FCFA" + "\n"
+        + "Statut : " + (estSoldee() ? " [SOLDEE]" : " [NON SOLDEE]") + "\n"
+        + "-------------------------------------------------";
+}
 }

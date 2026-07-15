@@ -43,6 +43,10 @@ public class Paiement {
     }
 
     public String toChaine() {
-        return "Paiement #" + numero + " du " + date + " - Montant versé: " + montantVerse + " FCFA";
-    }
+    return "----------------Paiement-----------------" + "\n"
+        + "Numéro :" + numero + "\n"
+        + "Date : " + date + "\n"
+        + "Montant versé : " + montantVerse + " FCFA" + "\n"
+        + "-------------------------------------------------";
+}
 }
