@@ -81,8 +81,12 @@ public class Commande {
     }
 
     public String toChaine() {
-        return "Commande #" + numero + " du " + date + " - Client: " + client.getPrenom()
-                + " " + client.getNom() + " - Total: " + montantTotal + " FCFA"
-                + (validee ? " [VALIDEE]" : " [NON VALIDEE]");
+        return "----------------Commande-----------------" + "\n"
+            + "Numéro :" + numero + "\n"
+            + "Date : "+ date + "\n"
+            + "Client :"+ client.getPrenom() + " "+client.getNom()+"\n"
+            + "Total :" + montantTotal + " FCFA"+ "\n"
+            + "Statut : "+ (validee ? " [VALIDEE]" : " [NON VALIDEE]") + "\n"
+            + "-------------------------------------------------";
     }
 }
