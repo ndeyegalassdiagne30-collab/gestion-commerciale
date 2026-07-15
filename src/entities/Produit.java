@@ -60,7 +60,11 @@ public class Produit {
     }
 
     public String toChaine() {
-        return "Produit #" + id + " - " + libelle + " (stock: " + quantiteEnStock
-                + ", prix unitaire: " + prixUnitaire + " FCFA)";
-    }
+    return "----------------Produit-----------------" + "\n"
+        + "ID : " + id + "\n"
+        + "Libellé : " + libelle + "\n"
+        + "Stock : " + quantiteEnStock + "\n"
+        + "Prix unitaire : " + prixUnitaire + " FCFA" + "\n"
+        + "-------------------------------------------------";
+}
 }

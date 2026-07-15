@@ -30,6 +30,10 @@ public class LigneCommande {
     }
 
     public String toChaine() {
-        return produit.getLibelle() + " x " + quantite + " = " + getSousTotal() + " FCFA";
-    }
+    return "----------------Ligne Commande-----------------" + "\n"
+        + "Produit : " + produit.getLibelle() + "\n"
+        + "Quantité : " + quantite + "\n"
+        + "Sous-total : " + getSousTotal() + " FCFA" + "\n"
+        + "-------------------------------------------------";
+}
 }
