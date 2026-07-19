@@ -1,22 +1,15 @@
-package src.service;
+package service;
 
-import src.entities.Produit;
-import src.repository.ProduitRepository;
+import entities.Produit;
+import repository.ProduitRepository;
 import java.util.List;
 
-/**
- * Contient la logique métier liée aux produits.
- */
 public class ProduitService {
 
-    private ProduitRepository produitRepository;
+    private ProduitRepository produitRepository = new ProduitRepository();
 
-    public ProduitService(ProduitRepository produitRepository) {
-        this.produitRepository = produitRepository;
-    }
-
-    public Produit ajouterProduit(String libelle, int quantiteEnStock, double prixUnitaire) {
-        return produitRepository.ajouter(libelle, quantiteEnStock, prixUnitaire);
+    public Produit ajouterProduit(Produit produit) {
+        return produitRepository.ajouter(produit);
     }
 
     public List<Produit> listerProduits() {
@@ -27,7 +20,6 @@ public class ProduitService {
         return produitRepository.trouverParId(id);
     }
 
-    // Bonus : recherche d'un produit par libellé
     public List<Produit> rechercherParLibelle(String libelle) {
         return produitRepository.rechercherParLibelle(libelle);
     }

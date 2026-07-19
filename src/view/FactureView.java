@@ -1,6 +1,6 @@
-package src.view;
+package view;
 
-import src.entities.Facture;
+import entities.Facture;
 import java.util.List;
 import java.util.Scanner;
 
@@ -9,8 +9,7 @@ public class FactureView {
     private Scanner scanner = new Scanner(System.in);
 
     public int saisirIdCommande() {
-        System.out.print("Id de la commande : ");
-        return Integer.parseInt(scanner.nextLine());
+        return Saisie.lireEntier(scanner, "Id de la commande : ");
     }
 
     public String saisirNumero() {
@@ -19,8 +18,7 @@ public class FactureView {
     }
 
     public int saisirId() {
-        System.out.print("Id de la facture : ");
-        return Integer.parseInt(scanner.nextLine());
+        return Saisie.lireEntier(scanner, "Id de la facture : ");
     }
 
     public void afficherMessage(String message) {

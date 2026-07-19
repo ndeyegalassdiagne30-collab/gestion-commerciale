@@ -1,4 +1,4 @@
-package src.view;
+package view;
 
 import java.util.Scanner;
 
@@ -59,6 +59,17 @@ class Saisie {
             double valeur = lireDouble(scanner, message);
             if (valeur < 0) {
                 System.out.println("Valeur invalide, veuillez saisir un nombre positif ou nul.");
+                continue;
+            }
+            return valeur;
+        }
+    }
+
+    static double lireDoubleStrictementPositif(Scanner scanner, String message) {
+        while (true) {
+            double valeur = lireDouble(scanner, message);
+            if (valeur <= 0) {
+                System.out.println("Valeur invalide, veuillez saisir un nombre strictement positif.");
                 continue;
             }
             return valeur;

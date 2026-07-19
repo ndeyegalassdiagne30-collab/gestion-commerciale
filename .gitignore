@@ -1,1 +1,23 @@
+# Fichiers compilés
+bin/
 *.class
+
+# Fichier généré par le script de compilation
+sources.txt
+
+# Driver JDBC (fichier lourd, à re-télécharger plutôt qu'à versionner)
+*.jar
+
+# Fichiers de configuration sensibles (si tu externalises un jour l'URL/mot de passe BD)
+config.properties
+*.env
+
+# Fichiers spécifiques aux IDE
+.vscode/
+.idea/
+*.iml
+out/
+
+# Fichiers système
+.DS_Store
+Thumbs.db

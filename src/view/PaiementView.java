@@ -1,6 +1,6 @@
-package src.view;
+package view;
 
-import src.entities.Facture;
+import entities.Facture;
 import java.util.Scanner;
 
 public class PaiementView {
@@ -8,8 +8,7 @@ public class PaiementView {
     private Scanner scanner = new Scanner(System.in);
 
     public int saisirIdFacture() {
-        System.out.print("Id de la facture : ");
-        return Integer.parseInt(scanner.nextLine());
+        return Saisie.lireEntier(scanner, "Id de la facture : ");
     }
 
     public String saisirNumero() {
@@ -18,8 +17,7 @@ public class PaiementView {
     }
 
     public double saisirMontant() {
-        System.out.print("Montant versé : ");
-        return Double.parseDouble(scanner.nextLine());
+        return Saisie.lireDoubleStrictementPositif(scanner, "Montant versé : ");
     }
 
     public void afficherMontantRestant(Facture facture) {

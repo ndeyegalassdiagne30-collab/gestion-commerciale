@@ -1,6 +1,6 @@
-package src.view;
+package view;
 
-import src.entities.Client;
+import entities.Client;
 import java.util.List;
 import java.util.Scanner;
 
@@ -19,8 +19,7 @@ public class ClientView {
     }
 
     public int saisirId() {
-        System.out.print("Id du client : ");
-        return Integer.parseInt(scanner.nextLine());
+        return Saisie.lireEntier(scanner, "Id du client : ");
     }
 
     public String saisirTelephone() {

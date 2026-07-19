@@ -1,8 +1,6 @@
-package src.view;
+package view;
 
-import src.entities.Client;
-import src.entities.Commande;
-import src.entities.Produit;
+import entities.Commande;
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,18 +14,15 @@ public class CommandeView {
     }
 
     public int saisirId() {
-        System.out.print("Id de la commande : ");
-        return Integer.parseInt(scanner.nextLine());
+        return Saisie.lireEntier(scanner, "Id de la commande : ");
     }
 
     public int saisirIdProduit() {
-        System.out.print("Id du produit à ajouter : ");
-        return Integer.parseInt(scanner.nextLine());
+        return Saisie.lireEntier(scanner, "Id du produit à ajouter : ");
     }
 
     public int saisirQuantite() {
-        System.out.print("Quantité : ");
-        return Integer.parseInt(scanner.nextLine());
+        return Saisie.lireEntierStrictementPositif(scanner, "Quantité : ");
     }
 
     public boolean demanderAjoutAutreProduit() {
