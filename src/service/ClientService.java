@@ -1,22 +1,17 @@
-package src.service;
 
-import src.entities.Client;
-import src.repository.ClientRepository;
+
+package service;
+
+import entities.Client;
+import repository.ClientRepository;
 import java.util.List;
 
-/**
- * Contient la logique métier liée aux clients.
- */
 public class ClientService {
 
-    private ClientRepository clientRepository;
+    private ClientRepository clientRepository = new ClientRepository();
 
-    public ClientService(ClientRepository clientRepository) {
-        this.clientRepository = clientRepository;
-    }
-
-    public Client ajouterClient(String nom, String prenom, String telephone) {
-        return clientRepository.ajouter(nom, prenom, telephone);
+    public Client ajouterClient(Client client) {
+        return clientRepository.ajouter(client);
     }
 
     public List<Client> listerClients() {
@@ -27,7 +22,6 @@ public class ClientService {
         return clientRepository.trouverParId(id);
     }
 
-    // Bonus : recherche d'un client par téléphone
     public List<Client> rechercherParTelephone(String telephone) {
         return clientRepository.rechercherParTelephone(telephone);
     }
