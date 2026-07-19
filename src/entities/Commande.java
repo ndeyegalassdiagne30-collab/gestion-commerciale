@@ -6,8 +6,7 @@ import java.util.List;
 
 /**
  * Représente une commande passée par un client.
- * Une commande appartient à un seul client et contient une ou plusieurs lignes
- * de commande.
+ * Contient la liste de ses lignes de commande (produits + quantités).
  */
 public class Commande {
 
@@ -15,22 +14,35 @@ public class Commande {
     private String numero;
     private LocalDate date;
     private double montantTotal;
+    private boolean validee;
     private Client client;
     private List<LigneCommande> lignes;
-    private boolean validee;
 
-    public Commande(int id, String numero, LocalDate date, Client client) {
-        this.id = id;
+    public Commande(String numero, Client client) {
         this.numero = numero;
-        this.date = date;
+        this.date = LocalDate.now();
         this.client = client;
         this.lignes = new ArrayList<>();
         this.montantTotal = 0;
         this.validee = false;
     }
 
+    public Commande(int id, String numero, LocalDate date, double montantTotal, boolean validee, Client client) {
+        this.id = id;
+        this.numero = numero;
+        this.date = date;
+        this.montantTotal = montantTotal;
+        this.validee = validee;
+        this.client = client;
+        this.lignes = new ArrayList<>();
+    }
+
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNumero() {
@@ -45,14 +57,6 @@ public class Commande {
         return montantTotal;
     }
 
-    public Client getClient() {
-        return client;
-    }
-
-    public List<LigneCommande> getLignes() {
-        return lignes;
-    }
-
     public boolean isValidee() {
         return validee;
     }
@@ -61,17 +65,23 @@ public class Commande {
         this.validee = validee;
     }
 
+    public Client getClient() {
+        return client;
+    }
+
+    public List<LigneCommande> getLignes() {
+        return lignes;
+    }
+
     /**
-     * Ajoute une ligne de commande (un produit + une quantité) à la commande.
+     * Ajoute une ligne en mémoire et recalcule le montant total.
+     * L'enregistrement en base est fait séparément par le repository.
      */
     public void ajouterLigne(LigneCommande ligne) {
         lignes.add(ligne);
         recalculerMontantTotal();
     }
 
-    /**
-     * Recalcule le montant total en additionnant le sous-total de chaque ligne.
-     */
     private void recalculerMontantTotal() {
         double total = 0;
         for (LigneCommande ligne : lignes) {
@@ -81,12 +91,12 @@ public class Commande {
     }
 
     public String toChaine() {
-        return "----------------Commande-----------------" + "\n"
-            + "Numéro :" + numero + "\n"
-            + "Date : "+ date + "\n"
-            + "Client :"+ client.getPrenom() + " "+client.getNom()+"\n"
-            + "Total :" + montantTotal + " FCFA"+ "\n"
-            + "Statut : "+ (validee ? " [VALIDEE]" : " [NON VALIDEE]") + "\n"
-            + "-------------------------------------------------";
+        return "Commande :" + "\n"
+                + "  Id      : " + id + "\n"
+                + "  Numéro  : " + numero + "\n"
+                + "  Date    : " + date + "\n"
+                + "  Client  : " + client.getPrenom() + " " + client.getNom() + "\n"
+                + "  Total   : " + montantTotal + " FCFA\n"
+                + "  Statut  : " + (validee ? "VALIDEE" : "NON VALIDEE");
     }
 }
