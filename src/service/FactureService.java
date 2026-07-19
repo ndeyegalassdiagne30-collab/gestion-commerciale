@@ -1,32 +1,24 @@
-package src.service;
 
-import src.entities.Commande;
-import src.entities.Facture;
-import src.repository.FactureRepository;
+package service;
+
+import entities.Commande;
+import entities.Facture;
+import repository.FactureRepository;
 import java.util.List;
 
 /**
  * Contient la logique métier liée aux factures.
- * Règle de gestion : une facture est générée automatiquement après
- * la validation d'une commande, et une facture est liée à une seule commande.
  */
 public class FactureService {
 
-    private FactureRepository factureRepository;
+    private FactureRepository factureRepository = new FactureRepository();
 
-    public FactureService(FactureRepository factureRepository) {
-        this.factureRepository = factureRepository;
-    }
-
-    /**
-     * Génère une facture pour une commande déjà validée.
-     * Retourne null si la commande n'est pas validée.
-     */
-    public Facture genererFacture(Commande commande, String numeroFacture) {
+    public Facture genererFacture(Commande commande, String numero) {
         if (!commande.isValidee()) {
             return null;
         }
-        return factureRepository.ajouter(numeroFacture, commande);
+        Facture facture = new Facture(numero, commande);
+        return factureRepository.ajouter(facture);
     }
 
     public List<Facture> listerFactures() {
@@ -41,8 +33,14 @@ public class FactureService {
         return factureRepository.trouverParCommande(commande);
     }
 
-    // Bonus : liste des factures impayées ou partiellement payées
+    // Bonus : factures impayées ou partiellement payées
     public List<Facture> listerFacturesImpayeesOuPartielles() {
-        return factureRepository.trouverFacturesImpayeesOuPartielles();
+        List<Facture> resultat = new java.util.ArrayList<>();
+        for (Facture facture : listerFactures()) {
+            if (!facture.estSoldee()) {
+                resultat.add(facture);
+            }
+        }
+        return resultat;
     }
 }
