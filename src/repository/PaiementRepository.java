@@ -2,9 +2,9 @@
 
 package repository;
 
-import config.ConnexionBD;
-import entities.Facture;
-import entities.Paiement;
+import src.config.ConnexionBD;
+import src.entities.Facture;
+import src.entities.Paiement;
 
 import java.sql.*;
 import java.util.ArrayList;

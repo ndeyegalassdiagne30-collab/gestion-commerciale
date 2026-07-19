@@ -1,9 +1,9 @@
 
 package service;
 
-import entities.Commande;
-import entities.LigneCommande;
-import entities.Produit;
+import src.entities.Commande;
+import src.entities.LigneCommande;
+import src.entities.Produit;
 import repository.CommandeRepository;
 import repository.ProduitRepository;
 import java.util.List;

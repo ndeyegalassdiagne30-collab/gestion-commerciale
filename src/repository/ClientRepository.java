@@ -1,7 +1,7 @@
 package repository;
 
-import config.ConnexionBD;
-import entities.Client;
+import src.config.ConnexionBD;
+import src.entities.Client;
 
 import java.sql.*;
 import java.util.ArrayList;

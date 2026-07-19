@@ -2,11 +2,11 @@
 
 package repository;
 
-import config.ConnexionBD;
-import entities.Client;
-import entities.Commande;
-import entities.LigneCommande;
-import entities.Produit;
+import src.config.ConnexionBD;
+import src.entities.Client;
+import src.entities.Commande;
+import src.entities.LigneCommande;
+import src.entities.Produit;
 
 import java.sql.*;
 import java.time.LocalDate;

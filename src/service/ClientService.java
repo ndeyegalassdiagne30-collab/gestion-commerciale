@@ -2,7 +2,7 @@
 
 package service;
 
-import entities.Client;
+import src.entities.Client;
 import repository.ClientRepository;
 import java.util.List;
 

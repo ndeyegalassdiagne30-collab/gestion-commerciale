@@ -4,11 +4,11 @@ import src.entities.Client;
 import src.entities.Commande;
 import src.entities.Facture;
 import src.entities.Produit;
-import src.service.ClientService;
-import src.service.CommandeService;
-import src.service.FactureService;
-import src.service.PaiementService;
-import src.service.ProduitService;
+import service.ClientService;
+import service.CommandeService;
+import service.FactureService;
+import service.PaiementService;
+import service.ProduitService;
 
 import java.util.Scanner;
 

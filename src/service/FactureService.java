@@ -1,8 +1,8 @@
 
 package service;
 
-import entities.Commande;
-import entities.Facture;
+import src.entities.Commande;
+import src.entities.Facture;
 import repository.FactureRepository;
 import java.util.List;
 

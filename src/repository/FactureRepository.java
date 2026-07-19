@@ -3,9 +3,9 @@
 
 package repository;
 
-import config.ConnexionBD;
-import entities.Commande;
-import entities.Facture;
+import src.config.ConnexionBD;
+import src.entities.Commande;
+import src.entities.Facture;
 
 import java.sql.*;
 import java.util.ArrayList;

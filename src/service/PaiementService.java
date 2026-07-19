@@ -1,8 +1,8 @@
 
 package service;
 
-import entities.Facture;
-import entities.Paiement;
+import src.entities.Facture;
+import src.entities.Paiement;
 import repository.PaiementRepository;
 
 /**
