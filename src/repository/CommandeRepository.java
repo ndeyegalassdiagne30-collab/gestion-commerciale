@@ -1,15 +1,13 @@
+package repository;
 
-
-package src.repository;
-
-import src.config.ConnexionBD;
-import src.entities.Client;
-import src.entities.Commande;
-import src.entities.LigneCommande;
-import src.entities.Produit;
+import config.ConnexionBD;
+import entities.Client;
+import entities.Commande;
+import entities.LigneCommande;
+import entities.Produit;
 
 import java.sql.*;
-import java.time.LocalDate;
+//import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +43,8 @@ public class CommandeRepository {
     }
 
     /**
-     * Ajoute une ligne de commande en base et met à jour le montant total de la commande.
+     * Ajoute une ligne de commande en base et met à jour le montant total de la
+     * commande.
      */
     public void ajouterLigne(Commande commande, LigneCommande ligne) {
         String sql = "INSERT INTO ligne_commande (commande_id, produit_id, quantite) VALUES (?, ?, ?)";
@@ -86,7 +85,7 @@ public class CommandeRepository {
         List<Commande> commandes = new ArrayList<>();
         String sql = "SELECT * FROM commande";
         try (Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+                ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 commandes.add(mapper(rs));
             }
@@ -141,7 +140,6 @@ public class CommandeRepository {
                 rs.getDate("date_commande").toLocalDate(),
                 rs.getDouble("montant_total"),
                 rs.getBoolean("validee"),
-                client
-        );
+                client);
     }
 }

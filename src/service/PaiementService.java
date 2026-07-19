@@ -1,9 +1,8 @@
+package service;
 
-package src.service;
-
-import src.entities.Facture;
-import src.entities.Paiement;
-import src.repository.PaiementRepository;
+import entities.Facture;
+import entities.Paiement;
+import repository.PaiementRepository;
 
 /**
  * Contient la logique métier liée aux paiements.

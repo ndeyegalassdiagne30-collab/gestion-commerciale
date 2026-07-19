@@ -1,9 +1,7 @@
+package service;
 
-
-package src.service;
-
-import src.entities.Client;
-import src.repository.ClientRepository;
+import entities.Client;
+import repository.ClientRepository;
 import java.util.List;
 
 public class ClientService {

@@ -1,8 +1,7 @@
+package service;
 
-package src.service;
-
-import src.entities.Produit;
-import src.repository.ProduitRepository;
+import entities.Produit;
+import repository.ProduitRepository;
 import java.util.List;
 
 public class ProduitService {

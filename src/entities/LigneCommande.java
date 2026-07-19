@@ -1,4 +1,4 @@
-package src.entities;
+package entities;
 
 /**
  * Une ligne de commande associe un produit à une quantité commandée.

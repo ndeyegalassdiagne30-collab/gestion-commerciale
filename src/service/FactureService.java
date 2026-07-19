@@ -1,9 +1,8 @@
+package service;
 
-package src.service;
-
-import src.entities.Commande;
-import src.entities.Facture;
-import src.repository.FactureRepository;
+import entities.Commande;
+import entities.Facture;
+import repository.FactureRepository;
 import java.util.List;
 
 /**
