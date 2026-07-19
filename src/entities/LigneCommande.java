@@ -2,16 +2,26 @@ package src.entities;
 
 /**
  * Une ligne de commande associe un produit à une quantité commandée.
- * Une commande est composée d'une ou plusieurs lignes de commande.
  */
 public class LigneCommande {
 
+    private int id;
     private Produit produit;
     private int quantite;
 
     public LigneCommande(Produit produit, int quantite) {
         this.produit = produit;
         this.quantite = quantite;
+    }
+
+    public LigneCommande(int id, Produit produit, int quantite) {
+        this.id = id;
+        this.produit = produit;
+        this.quantite = quantite;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public Produit getProduit() {
@@ -22,14 +32,11 @@ public class LigneCommande {
         return quantite;
     }
 
-    /**
-     * Calcule le sous-total de la ligne : prix unitaire * quantité.
-     */
     public double getSousTotal() {
         return produit.getPrixUnitaire() * quantite;
     }
 
     public String toChaine() {
-        return produit.getLibelle() + " x " + quantite + " = " + getSousTotal() + " FCFA";
+        return "  - " + produit.getLibelle() + " x " + quantite + " = " + getSousTotal() + " FCFA";
     }
 }
