@@ -1,7 +1,8 @@
 
 
 
-package repository;
+
+package src.repository;
 
 import src.config.ConnexionBD;
 import src.entities.Commande;

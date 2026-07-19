@@ -1,11 +1,11 @@
 
-package service;
+package src.service;
 
 import src.entities.Commande;
 import src.entities.LigneCommande;
 import src.entities.Produit;
-import repository.CommandeRepository;
-import repository.ProduitRepository;
+import src.repository.CommandeRepository;
+import src.repository.ProduitRepository;
 import java.util.List;
 
 /**

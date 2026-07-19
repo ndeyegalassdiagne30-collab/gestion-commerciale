@@ -1,9 +1,9 @@
-package src.view;
+package view;
 
-import src.entities.Client;
-import src.entities.Commande;
-import src.entities.Facture;
-import src.entities.Produit;
+import entities.Client;
+import entities.Commande;
+import entities.Facture;
+import entities.Produit;
 import service.ClientService;
 import service.CommandeService;
 import service.FactureService;
@@ -46,8 +46,7 @@ public class MenuView {
             System.out.println("8. Afficher les factures impayées ou partielles");
             System.out.println("9. Enregistrer un paiement");
             System.out.println("0. Quitter");
-            System.out.print("Choix : ");
-            choix = Integer.parseInt(scanner.nextLine());
+            choix = Saisie.lireEntier(scanner, "Choix : ");
 
             switch (choix) {
                 case 1:

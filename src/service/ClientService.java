@@ -1,9 +1,9 @@
 
 
-package service;
+package src.service;
 
 import src.entities.Client;
-import repository.ClientRepository;
+import src.repository.ClientRepository;
 import java.util.List;
 
 public class ClientService {
