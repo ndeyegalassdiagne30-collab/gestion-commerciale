@@ -94,4 +94,19 @@ public class ClientRepository {
                 rs.getString("prenom"),
                 rs.getString("telephone"));
     }
+
+    /**
+     * Vérifie si un client existe déjà avec ce numéro de téléphone exact (doublon).
+     */
+    public boolean existeParTelephone(String telephone) {
+        String sql = "SELECT 1 FROM client WHERE telephone = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, telephone);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur lors de la vérification du doublon téléphone", e);
+        }
+    }
 }

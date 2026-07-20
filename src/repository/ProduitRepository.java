@@ -38,7 +38,7 @@ public class ProduitRepository {
         List<Produit> produits = new ArrayList<>();
         String sql = "SELECT * FROM produit";
         try (Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+                ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 produits.add(mapper(rs));
             }
@@ -98,7 +98,21 @@ public class ProduitRepository {
                 rs.getInt("id"),
                 rs.getString("libelle"),
                 rs.getInt("quantite_stock"),
-                rs.getDouble("prix_unitaire")
-        );
+                rs.getDouble("prix_unitaire"));
+    }
+
+    /**
+     * Vérifie si un produit existe déjà avec ce libellé exact (doublon).
+     */
+    public boolean existeParLibelle(String libelle) {
+        String sql = "SELECT 1 FROM produit WHERE libelle = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, libelle);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur lors de la vérification du doublon libellé", e);
+        }
     }
 }

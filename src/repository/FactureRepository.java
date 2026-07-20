@@ -92,4 +92,16 @@ public class FactureRepository {
         facture.getPaiements().addAll(new PaiementRepository().trouverParFacture(facture));
         return facture;
     }
+
+    public boolean existeParNumero(String numero) {
+    String sql = "SELECT 1 FROM facture WHERE numero = ?";
+    try (PreparedStatement ps = connection.prepareStatement(sql)) {
+        ps.setString(1, numero);
+        try (ResultSet rs = ps.executeQuery()) {
+            return rs.next();
+        }
+    } catch (SQLException e) {
+        throw new RuntimeException("Erreur lors de la vérification du doublon numéro de facture", e);
+    }
+}
 }

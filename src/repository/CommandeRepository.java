@@ -142,4 +142,19 @@ public class CommandeRepository {
                 rs.getBoolean("validee"),
                 client);
     }
+
+    /**
+     * Vérifie si une commande existe déjà avec ce numéro exact (doublon).
+     */
+    public boolean existeParNumero(String numero) {
+        String sql = "SELECT 1 FROM commande WHERE numero = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, numero);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur lors de la vérification du doublon numéro de commande", e);
+        }
+    }
 }
