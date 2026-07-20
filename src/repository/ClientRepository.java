@@ -42,7 +42,7 @@ public class ClientRepository {
         List<Client> clients = new ArrayList<>();
         String sql = "SELECT * FROM client";
         try (Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+                ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 clients.add(mapper(rs));
             }
@@ -92,7 +92,6 @@ public class ClientRepository {
                 rs.getInt("id"),
                 rs.getString("nom"),
                 rs.getString("prenom"),
-                rs.getString("telephone")
-        );
+                rs.getString("telephone"));
     }
 }

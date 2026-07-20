@@ -12,25 +12,93 @@ import service.ProduitService;
 
 import java.util.Scanner;
 
-/**
- * Menu principal : construit les services et sous-vues, puis orchestre
- * la saisie (View) et le traitement (Service) pour chaque fonctionnalité.
- */
 public class MenuView {
 
     private Scanner scanner = new Scanner(System.in);
 
-    private ClientService clientService = new ClientService();
-    private ProduitService produitService = new ProduitService();
-    private CommandeService commandeService = new CommandeService();
-    private FactureService factureService = new FactureService();
-    private PaiementService paiementService = new PaiementService();
+    // Aucun objet n'est créé ici. Les champs restent vides tant qu'on ne s'en sert pas.
+    private ClientService clientService;
+    private ProduitService produitService;
+    private CommandeService commandeService;
+    private FactureService factureService;
+    private PaiementService paiementService;
 
-    private ClientView clientView = new ClientView();
-    private ProduitView produitView = new ProduitView();
-    private CommandeView commandeView = new CommandeView();
-    private FactureView factureView = new FactureView();
-    private PaiementView paiementView = new PaiementView();
+    private ClientView clientView;
+    private ProduitView produitView;
+    private CommandeView commandeView;
+    private FactureView factureView;
+    private PaiementView paiementView;
+
+    // Chaque getter crée l'objet une seule fois, au moment où il est réellement demandé
+    private ClientService getClientService() {
+        if (clientService == null) {
+            clientService = new ClientService();
+        }
+        return clientService;
+    }
+
+    private ProduitService getProduitService() {
+        if (produitService == null) {
+            produitService = new ProduitService();
+        }
+        return produitService;
+    }
+
+    private CommandeService getCommandeService() {
+        if (commandeService == null) {
+            commandeService = new CommandeService();
+        }
+        return commandeService;
+    }
+
+    private FactureService getFactureService() {
+        if (factureService == null) {
+            factureService = new FactureService();
+        }
+        return factureService;
+    }
+
+    private PaiementService getPaiementService() {
+        if (paiementService == null) {
+            paiementService = new PaiementService();
+        }
+        return paiementService;
+    }
+
+    private ClientView getClientView() {
+        if (clientView == null) {
+            clientView = new ClientView();
+        }
+        return clientView;
+    }
+
+    private ProduitView getProduitView() {
+        if (produitView == null) {
+            produitView = new ProduitView();
+        }
+        return produitView;
+    }
+
+    private CommandeView getCommandeView() {
+        if (commandeView == null) {
+            commandeView = new CommandeView();
+        }
+        return commandeView;
+    }
+
+    private FactureView getFactureView() {
+        if (factureView == null) {
+            factureView = new FactureView();
+        }
+        return factureView;
+    }
+
+    private PaiementView getPaiementView() {
+        if (paiementView == null) {
+            paiementView = new PaiementView();
+        }
+        return paiementView;
+    }
 
     public void demarrer() {
         int choix = -1;
@@ -46,23 +114,24 @@ public class MenuView {
             System.out.println("8. Afficher les factures impayées ou partielles");
             System.out.println("9. Enregistrer un paiement");
             System.out.println("0. Quitter");
-            choix = Saisie.lireEntier(scanner, "Choix : ");
+            System.out.print("Choix : ");
+            choix = Integer.parseInt(scanner.nextLine());
 
             switch (choix) {
                 case 1:
-                    clientService.ajouterClient(clientView.saisirClient());
+                    getClientService().ajouterClient(getClientView().saisirClient());
                     break;
 
                 case 2:
-                    clientView.afficherClients(clientService.listerClients());
+                    getClientView().afficherClients(getClientService().listerClients());
                     break;
 
                 case 3:
-                    produitService.ajouterProduit(produitView.saisirProduit());
+                    getProduitService().ajouterProduit(getProduitView().saisirProduit());
                     break;
 
                 case 4:
-                    produitView.afficherProduits(produitService.listerProduits());
+                    getProduitView().afficherProduits(getProduitService().listerProduits());
                     break;
 
                 case 5:
@@ -70,7 +139,7 @@ public class MenuView {
                     break;
 
                 case 6:
-                    commandeView.afficherCommandes(commandeService.listerCommandes());
+                    getCommandeView().afficherCommandes(getCommandeService().listerCommandes());
                     break;
 
                 case 7:
@@ -78,7 +147,7 @@ public class MenuView {
                     break;
 
                 case 8:
-                    factureView.afficherFactures(factureService.listerFacturesImpayeesOuPartielles());
+                    getFactureView().afficherFactures(getFactureService().listerFacturesImpayeesOuPartielles());
                     break;
 
                 case 9:
@@ -96,69 +165,69 @@ public class MenuView {
     }
 
     private void creerCommande() {
-        int idClient = clientView.saisirId();
-        Client client = clientService.trouverParId(idClient);
+        int idClient = getClientView().saisirId();
+        Client client = getClientService().trouverParId(idClient);
         if (client == null) {
-            commandeView.afficherMessage("Client introuvable.");
+            getCommandeView().afficherMessage("Client introuvable.");
             return;
         }
 
-        String numero = commandeView.saisirNumero();
-        Commande commande = commandeService.creerCommande(new Commande(numero, client));
+        String numero = getCommandeView().saisirNumero();
+        Commande commande = getCommandeService().creerCommande(new Commande(numero, client));
 
         boolean continuer = true;
         while (continuer) {
-            int idProduit = commandeView.saisirIdProduit();
-            Produit produit = produitService.trouverParId(idProduit);
+            int idProduit = getCommandeView().saisirIdProduit();
+            Produit produit = getProduitService().trouverParId(idProduit);
             if (produit == null) {
-                commandeView.afficherMessage("Produit introuvable.");
+                getCommandeView().afficherMessage("Produit introuvable.");
                 continue;
             }
-            int quantite = commandeView.saisirQuantite();
-            boolean ok = commandeService.ajouterProduitACommande(commande, produit, quantite);
-            commandeView.afficherMessage(ok ? "Produit ajouté." : "Stock insuffisant.");
-            continuer = commandeView.demanderAjoutAutreProduit();
+            int quantite = getCommandeView().saisirQuantite();
+            boolean ok = getCommandeService().ajouterProduitACommande(commande, produit, quantite);
+            getCommandeView().afficherMessage(ok ? "Produit ajouté." : "Stock insuffisant.");
+            continuer = getCommandeView().demanderAjoutAutreProduit();
         }
 
-        boolean validee = commandeService.validerCommande(commande);
-        commandeView.afficherMessage(validee ? "Commande validée." : "Commande non validée (aucun produit).");
-        commandeView.afficherCommande(commande);
+        boolean validee = getCommandeService().validerCommande(commande);
+        getCommandeView().afficherMessage(validee ? "Commande validée." : "Commande non validée (aucun produit).");
+        getCommandeView().afficherCommande(commande);
     }
 
     private void genererFacture() {
-        int idCommande = factureView.saisirIdCommande();
-        Commande commande = commandeService.trouverParId(idCommande);
+        int idCommande = getFactureView().saisirIdCommande();
+        Commande commande = getCommandeService().trouverParId(idCommande);
         if (commande == null) {
-            factureView.afficherMessage("Commande introuvable.");
+            getFactureView().afficherMessage("Commande introuvable.");
             return;
         }
-        String numero = factureView.saisirNumero();
-        Facture facture = factureService.genererFacture(commande, numero);
+        String numero = getFactureView().saisirNumero();
+        Facture facture = getFactureService().genererFacture(commande, numero);
         if (facture == null) {
-            factureView.afficherMessage("La commande n'est pas validée.");
+            getFactureView().afficherMessage("La commande n'est pas validée.");
         } else {
-            factureView.afficherFacture(facture);
+            getFactureView().afficherFacture(facture);
         }
     }
 
     private void enregistrerPaiement() {
-        int idFacture = paiementView.saisirIdFacture();
-        Facture facture = factureService.trouverParId(idFacture);
+        int idFacture = getPaiementView().saisirIdFacture();
+        Facture facture = getFactureService().trouverParId(idFacture);
         if (facture == null) {
-            paiementView.afficherMessage("Facture introuvable.");
+            getPaiementView().afficherMessage("Facture introuvable.");
             return;
         }
-        paiementView.afficherMontantRestant(facture);
-        String numero = paiementView.saisirNumero();
-        double montant = paiementView.saisirMontant();
+        getPaiementView().afficherMontantRestant(facture);
+        String numero = getPaiementView().saisirNumero();
+        double montant = getPaiementView().saisirMontant();
 
-        var paiement = paiementService.enregistrerPaiement(facture, numero, montant);
+        var paiement = getPaiementService().enregistrerPaiement(facture, numero, montant);
         if (paiement == null) {
-            paiementView.afficherMessage("Paiement refusé : montant invalide ou trop élevé.");
+            getPaiementView().afficherMessage("Paiement refusé : montant invalide ou trop élevé.");
         } else {
-            paiementView.afficherMessage("Paiement enregistré.");
+            getPaiementView().afficherMessage("Paiement enregistré.");
             if (facture.estSoldee()) {
-                paiementView.afficherMessage("Facture soldée. Commande payée.");
+                getPaiementView().afficherMessage("Facture soldée. Commande payée.");
             }
         }
     }
