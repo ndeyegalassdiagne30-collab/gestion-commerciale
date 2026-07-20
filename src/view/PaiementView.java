@@ -1,23 +1,23 @@
 package view;
 
 import entities.Facture;
+import utils.Validateur;
 import java.util.Scanner;
 
 public class PaiementView {
 
-    private Scanner scanner = new Scanner(System.in);
+    private Console console = new Console(new Scanner(System.in));
 
     public int saisirIdFacture() {
-        return Saisie.lireEntier(scanner, "Id de la facture : ");
+        return console.lireEntier("Id de la facture : ", 1, Validateur.ID_MAX);
     }
 
     public String saisirNumero() {
-        System.out.print("Numéro du paiement : ");
-        return scanner.nextLine();
+        return console.lireChaineNonVide("Numéro du paiement : ");
     }
 
     public double saisirMontant() {
-        return Saisie.lireDoubleStrictementPositif(scanner, "Montant versé : ");
+        return console.lireDouble("Montant versé : ", Validateur.MONTANT_MIN, Validateur.MONTANT_MAX);
     }
 
     public void afficherMontantRestant(Facture facture) {

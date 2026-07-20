@@ -1,28 +1,32 @@
 package view;
 
 import entities.Produit;
+import utils.Validateur;
 import java.util.List;
 import java.util.Scanner;
 
 public class ProduitView {
 
-    private Scanner scanner = new Scanner(System.in);
+    private Console console = new Console(new Scanner(System.in));
 
     public Produit saisirProduit() {
-        System.out.print("Libellé : ");
-        String libelle = scanner.nextLine();
-        int quantite = Saisie.lireEntierPositifOuNul(scanner, "Quantité en stock : ");
-        double prix = Saisie.lireDoublePositifOuNul(scanner, "Prix unitaire : ");
+        String libelle = console.lireChaineNonVide("Libellé : ");
+        int quantite = console.lireEntier("Quantité en stock (min " + Validateur.QUANTITE_MIN + ") : ",
+                Validateur.QUANTITE_MIN, Validateur.QUANTITE_MAX);
+        double prix = console.lireDouble("Prix unitaire : ", Validateur.PRIX_MIN, Validateur.PRIX_MAX);
         return new Produit(libelle, quantite, prix);
     }
 
     public int saisirId() {
-        return Saisie.lireEntier(scanner, "Id du produit : ");
+        return console.lireEntier("Id du produit : ", 1, Validateur.ID_MAX);
     }
 
     public String saisirLibelle() {
-        System.out.print("Libellé à rechercher : ");
-        return scanner.nextLine();
+        return console.lireChaineNonVide("Libellé à rechercher : ");
+    }
+
+    public void afficherMessage(String message) {
+        System.out.println(message);
     }
 
     public void afficherProduits(List<Produit> produits) {

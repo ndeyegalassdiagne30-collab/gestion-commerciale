@@ -1,30 +1,31 @@
 package view;
 
 import entities.Client;
+import utils.Validateur;
 import java.util.List;
 import java.util.Scanner;
 
 public class ClientView {
 
-    private Scanner scanner = new Scanner(System.in);
+    private Console console = new Console(new Scanner(System.in));
 
     public Client saisirClient() {
-        System.out.print("Nom : ");
-        String nom = scanner.nextLine();
-        System.out.print("Prénom : ");
-        String prenom = scanner.nextLine();
-        System.out.print("Téléphone : ");
-        String telephone = scanner.nextLine();
+        String nom = console.lireChaineNonVide("Nom : ");
+        String prenom = console.lireChaineNonVide("Prénom : ");
+        String telephone = console.lireTelephoneOrange("Téléphone (ex: 771234567) : ");
         return new Client(nom, prenom, telephone);
     }
 
     public int saisirId() {
-        return Saisie.lireEntier(scanner, "Id du client : ");
+        return console.lireEntier("Id du client : ", 1, Validateur.ID_MAX);
     }
 
     public String saisirTelephone() {
-        System.out.print("Téléphone à rechercher : ");
-        return scanner.nextLine();
+        return console.lireChaineNonVide("Téléphone à rechercher : ");
+    }
+
+    public void afficherMessage(String message) {
+        System.out.println(message);
     }
 
     public void afficherClients(List<Client> clients) {

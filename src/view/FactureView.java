@@ -1,24 +1,24 @@
 package view;
 
 import entities.Facture;
+import utils.Validateur;
 import java.util.List;
 import java.util.Scanner;
 
 public class FactureView {
 
-    private Scanner scanner = new Scanner(System.in);
+    private Console console = new Console(new Scanner(System.in));
 
     public int saisirIdCommande() {
-        return Saisie.lireEntier(scanner, "Id de la commande : ");
+        return console.lireEntier("Id de la commande : ", 1, Validateur.ID_MAX);
     }
 
     public String saisirNumero() {
-        System.out.print("Numéro de la facture : ");
-        return scanner.nextLine();
+        return console.lireChaineNonVide("Numéro de la facture : ");
     }
 
     public int saisirId() {
-        return Saisie.lireEntier(scanner, "Id de la facture : ");
+        return console.lireEntier("Id de la facture : ", 1, Validateur.ID_MAX);
     }
 
     public void afficherMessage(String message) {
