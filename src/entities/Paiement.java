@@ -1,10 +1,9 @@
-package src.entities;
+package entities;
 
 import java.time.LocalDate;
 
 /**
- * Représente un paiement effectué par un client pour régler une facture.
- * Une facture peut recevoir plusieurs paiements (règlement en plusieurs fois).
+ * Représente un paiement effectué pour régler une facture.
  */
 public class Paiement {
 
@@ -13,6 +12,13 @@ public class Paiement {
     private LocalDate date;
     private double montantVerse;
     private Facture facture;
+
+    public Paiement(String numero, double montantVerse, Facture facture) {
+        this.numero = numero;
+        this.date = LocalDate.now();
+        this.montantVerse = montantVerse;
+        this.facture = facture;
+    }
 
     public Paiement(int id, String numero, LocalDate date, double montantVerse, Facture facture) {
         this.id = id;
@@ -24,6 +30,10 @@ public class Paiement {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNumero() {
@@ -43,10 +53,10 @@ public class Paiement {
     }
 
     public String toChaine() {
-    return "----------------Paiement-----------------" + "\n"
-        + "Numéro :" + numero + "\n"
-        + "Date : " + date + "\n"
-        + "Montant versé : " + montantVerse + " FCFA" + "\n"
-        + "-------------------------------------------------";
-}
+        return "Paiement :" + "\n"
+                + "  Id      : " + id + "\n"
+                + "  Numéro  : " + numero + "\n"
+                + "  Date    : " + date + "\n"
+                + "  Montant : " + montantVerse + " FCFA";
+    }
 }

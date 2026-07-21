@@ -1,83 +1,40 @@
-package src.view;
+package view;
 
-import src.entities.Produit;
-import src.service.ProduitService;
+import entities.Produit;
+import utils.Validateur;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * Gère les interactions console pour la gestion des produits.
- */
 public class ProduitView {
 
-    private ProduitService produitService;
-    private Scanner scanner;
+    private Console console = new Console(new Scanner(System.in));
 
-    public ProduitView(ProduitService produitService, Scanner scanner) {
-        this.produitService = produitService;
-        this.scanner = scanner;
+    public Produit saisirProduit() {
+        String libelle = console.lireChaineNonVide("Libellé : ");
+        int quantite = console.lireEntier("Quantité en stock (min " + Validateur.QUANTITE_MIN + ") : ",
+                Validateur.QUANTITE_MIN, Validateur.QUANTITE_MAX);
+        double prix = console.lireDouble("Prix unitaire : ", Validateur.PRIX_MIN, Validateur.PRIX_MAX);
+        return new Produit(libelle, quantite, prix);
     }
 
-    public void afficherMenu() {
-        boolean retour = false;
-        while (!retour) {
-            System.out.println("\n--- GESTION DES PRODUITS ---");
-            System.out.println("1. Ajouter un produit");
-            System.out.println("2. Afficher la liste des produits");
-            System.out.println("3. Rechercher un produit par libellé");
-            System.out.println("0. Retour");
-            System.out.print("Choix : ");
-            String choix = scanner.nextLine();
-
-            switch (choix) {
-                case "1":
-                    ajouterProduit();
-                    break;
-                case "2":
-                    afficherProduits();
-                    break;
-                case "3":
-                    rechercherParLibelle();
-                    break;
-                case "0":
-                    retour = true;
-                    break;
-                default:
-                    System.out.println("Choix invalide.");
-            }
-        }
+    public int saisirId() {
+        return console.lireEntier("Id du produit : ", 1, Validateur.ID_MAX);
     }
 
-    private void ajouterProduit() {
-        System.out.print("Libellé : ");
-        String libelle = scanner.nextLine();
-        int quantite = Saisie.lireEntierPositifOuNul(scanner, "Quantité en stock : ");
-        double prix = Saisie.lireDoublePositifOuNul(scanner, "Prix unitaire : ");
-
-        Produit produit = produitService.ajouterProduit(libelle, quantite, prix);
-        System.out.println("Produit ajouté : " + produit.toChaine());
+    public String saisirLibelle() {
+        return console.lireChaineNonVide("Libellé à rechercher : ");
     }
 
-    private void afficherProduits() {
-        List<Produit> produits = produitService.listerProduits();
+    public void afficherMessage(String message) {
+        System.out.println(message);
+    }
+
+    public void afficherProduits(List<Produit> produits) {
         if (produits.isEmpty()) {
             System.out.println("Aucun produit enregistré.");
             return;
         }
         for (Produit produit : produits) {
-            System.out.println(produit.toChaine());
-        }
-    }
-
-    private void rechercherParLibelle() {
-        System.out.print("Libellé à rechercher : ");
-        String libelle = scanner.nextLine();
-        List<Produit> resultats = produitService.rechercherParLibelle(libelle);
-        if (resultats.isEmpty()) {
-            System.out.println("Aucun produit trouvé.");
-            return;
-        }
-        for (Produit produit : resultats) {
             System.out.println(produit.toChaine());
         }
     }

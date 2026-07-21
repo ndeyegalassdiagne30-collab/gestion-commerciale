@@ -1,37 +1,28 @@
-package src.service;
+package service;
 
-import src.entities.Facture;
-import src.entities.Paiement;
-import src.repository.PaiementRepository;
-import java.util.List;
+import entities.Facture;
+import entities.Paiement;
+import repository.PaiementRepository;
 
-/**
- * Contient la logique métier liée aux paiements.
- * Règle de gestion : le montant total des paiements ne doit jamais
- * dépasser le montant de la facture.
- */
 public class PaiementService {
 
-    private PaiementRepository paiementRepository;
-
-    public PaiementService(PaiementRepository paiementRepository) {
-        this.paiementRepository = paiementRepository;
-    }
+    private PaiementRepository paiementRepository = new PaiementRepository();
 
     /**
-     * Enregistre un paiement pour une facture, si le montant ne dépasse pas
-     * le montant restant à payer. Retourne null si le paiement est refusé.
+     * Enregistre un paiement, sauf si :
+     * - le montant est invalide ou dépasse le solde restant
+     * - le numéro de paiement existe déjà (doublon)
      */
     public Paiement enregistrerPaiement(Facture facture, String numero, double montant) {
         if (montant <= 0 || montant > facture.getMontantRestant()) {
             return null;
         }
-        Paiement paiement = paiementRepository.ajouter(numero, montant, facture);
+        if (paiementRepository.existeParNumero(numero)) {
+            return null;
+        }
+        Paiement paiement = new Paiement(numero, montant, facture);
+        paiementRepository.ajouter(paiement);
         facture.ajouterPaiement(paiement);
         return paiement;
-    }
-
-    public List<Paiement> listerPaiementsDeFacture(Facture facture) {
-        return paiementRepository.trouverParFacture(facture);
     }
 }
