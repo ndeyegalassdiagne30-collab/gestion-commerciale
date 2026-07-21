@@ -7,23 +7,21 @@ import repository.CommandeRepository;
 import repository.ProduitRepository;
 import java.util.List;
 
-/**
- * Contient la logique métier liée aux commandes.
- */
 public class CommandeService {
 
     private CommandeRepository commandeRepository = new CommandeRepository();
     private ProduitRepository produitRepository = new ProduitRepository();
 
+    /**
+     * Crée une commande, sauf si le numéro existe déjà (doublon).
+     */
     public Commande creerCommande(Commande commande) {
+        if (commandeRepository.existeParNumero(commande.getNumero())) {
+            return null;
+        }
         return commandeRepository.ajouter(commande);
     }
 
-    /**
-     * Ajoute un produit à une commande : vérifie le stock, le décrémente,
-     * enregistre la ligne en base et met à jour le montant total.
-     * Retourne false si le stock est insuffisant.
-     */
     public boolean ajouterProduitACommande(Commande commande, Produit produit, int quantite) {
         if (quantite > produit.getQuantiteEnStock()) {
             return false;

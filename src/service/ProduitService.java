@@ -8,7 +8,13 @@ public class ProduitService {
 
     private ProduitRepository produitRepository = new ProduitRepository();
 
+    /**
+     * Ajoute un produit, sauf si un produit existe déjà avec le même libellé (doublon).
+     */
     public Produit ajouterProduit(Produit produit) {
+        if (produitRepository.existeParLibelle(produit.getLibelle())) {
+            return null;
+        }
         return produitRepository.ajouter(produit);
     }
 

@@ -3,17 +3,22 @@ package service;
 import entities.Commande;
 import entities.Facture;
 import repository.FactureRepository;
+import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Contient la logique métier liée aux factures.
- */
 public class FactureService {
 
     private FactureRepository factureRepository = new FactureRepository();
 
+    /**
+     * Génère une facture, sauf si la commande n'est pas validée
+     * ou si le numéro de facture existe déjà (doublon).
+     */
     public Facture genererFacture(Commande commande, String numero) {
         if (!commande.isValidee()) {
+            return null;
+        }
+        if (factureRepository.existeParNumero(numero)) {
             return null;
         }
         Facture facture = new Facture(numero, commande);
@@ -32,9 +37,8 @@ public class FactureService {
         return factureRepository.trouverParCommande(commande);
     }
 
-    // Bonus : factures impayées ou partiellement payées
     public List<Facture> listerFacturesImpayeesOuPartielles() {
-        List<Facture> resultat = new java.util.ArrayList<>();
+        List<Facture> resultat = new ArrayList<>();
         for (Facture facture : listerFactures()) {
             if (!facture.estSoldee()) {
                 resultat.add(facture);
